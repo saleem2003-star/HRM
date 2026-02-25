@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Employee_register
+
 # Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -31,8 +32,8 @@ def employee_data(request):
     #         Employee_register.objects.create(**serializer.validated_data)
     #         return Response(serializer.data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+from django.utils import timezone   
 @api_view(['PUT','DELETE'])
 def employee_update(request,id):
     try :
@@ -48,3 +49,42 @@ def employee_update(request,id):
     if request.method == 'DELETE':
         employee.delete()
         return Response({"message": "Deleted"})
+
+
+# def home(request):
+#     users = Employee_register.objects.all()
+#     return render(request, 'home.html',{'users':users})
+
+from .models import *
+def admin_data(request):
+    # for employee in Employee_register:
+    name = Employee_register.objects.all()
+    
+    print(name)
+    return render(request,'home.html', {'name':name})
+time = timezone.now().time()
+import datetime
+
+
+
+def attendence(request):
+    time = datetime.datetime.now()
+    if request.method == 'POST':
+            employe = Employee_register.objects.get(id=3)
+            action = request.POST.get('action')
+            if action == 'checkin':
+                obj = Employee_Attendence.objects.create(name=employe,check_in= time)
+                obj.save()
+                return redirect('home')
+            elif action == 'checkout':
+                obj = Employee_Attendence.objects.create(name=employe,check_out= time)
+                obj.save()
+                return redirect('home')
+    return render(request,'attendence.html')
+
+
+def emp(request):
+    obj = Employee_register.objects.get(id=3)
+    status =  Employee_Attendence.objects.filter(name=obj)
+    
+    return render (request,'dash.html',{'x':status})

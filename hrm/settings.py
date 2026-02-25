@@ -25,6 +25,11 @@ SECRET_KEY = 'django-insecure-3y6_3t8vnttv!(aqy_)h0m7e2swqcg%!7reuohc)p!vkhdk7p0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ["*"]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+# "192.168.0.25", "localhost", "127.0.0.1"
+
 ALLOWED_HOSTS = []
 
 
@@ -55,11 +60,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'hrm.urls'
-
+import os 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,11 +115,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
+USE_TZ = True
 
 USE_I18N = True
 
-USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
