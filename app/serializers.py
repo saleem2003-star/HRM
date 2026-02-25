@@ -5,4 +5,3 @@ class Employee_serializer(serializers.ModelSerializer):
     class Meta:
         model = Employee_register
         fields = '__all__'
-    

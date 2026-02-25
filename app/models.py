@@ -35,7 +35,9 @@ class Employee_BreakManagement(models.Model):
     name = models.ForeignKey(Employee_register,on_delete=models.CASCADE)
     break_in = models.DateTimeField()
     break_out = models.DateTimeField()
-    
+
+
+   
  
     
     

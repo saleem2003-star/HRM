@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',admin_data,name='home'),
     path('a/',attendence,name='attendence'),
-    path('d/',emp)
-    # path("api/", include("app.urls"))
+    path('d/',emp),
+    path("api/", include("app.urls"))
 ]
